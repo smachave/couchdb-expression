@@ -1,20 +1,11 @@
-name: Node.js CI
+on: ["push", "pull_request"]
 
-env:
-  COVERALLS_SERVICE_NAME: tkshnwesper/couchdb-expression
-  COVERALLS_GIT_BRANCH: master
-  COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-  CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+name: Test Coveralls
 
 jobs:
-  build:
 
+  build:
+    name: Build
     runs-on: ubuntu-latest
 
     services:
@@ -23,21 +14,22 @@ jobs:
         ports:
           - 5984:5984
 
-    strategy:
-      matrix:
-        node-version: [18.x]
-
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-      - run: chmod +x ./cc-test-reporter
-      - run: ./cc-test-reporter before-build
-      - run: npm ci
-      - run: npm run build --if-present
-      - run: npm test
-      - run: npm run coverage
-      - run: ./cc-test-reporter after-build
+
+    - uses: actions/checkout@v4
+
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+
+    - name: npm install, make test-coverage
+      run: |
+        npm install
+        npm test
+        npm run coverage
+
+    - name: Coveralls
+      uses: coverallsapp/github-action@v2
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
