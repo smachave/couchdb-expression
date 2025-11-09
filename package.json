@@ -3,7 +3,7 @@
   "version": "1.6.1",
   "description": "Express Session Store for CouchDB",
   "main": "index.js",
-  "repository": "https://github.com/tkshnwesper/couchdb-expression",
+  "repository": "https://github.com/smachave/couchdb-expression",
   "author": "Saurabh M. Machave",
   "license": "MIT",
   "scripts": {
