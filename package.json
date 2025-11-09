@@ -4,7 +4,7 @@
   "description": "Express Session Store for CouchDB",
   "main": "index.js",
   "repository": "https://github.com/smachave/couchdb-expression",
-  "author": "Saurabh M. Machave",
+  "author": "smachave",
   "license": "MIT",
   "scripts": {
     "test": "nyc --reporter=lcov mocha",
@@ -22,13 +22,13 @@
     "babel-eslint": "^10.0.1",
     "chai": "^4.2.0",
     "coveralls": "^3.0.3",
-    "eslint": "6.8.0",
+    "eslint": "^9.39.1",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "mocha": "^10.1.0",
     "mocha-lcov-reporter": "^1.3.0",
     "nyc": "^15.0.0",
-    "prettier-eslint": "^10.0.0",
+    "prettier-eslint": "^16.4.2",
     "sinon": "^9.0.0"
   },
   "dependencies": {
